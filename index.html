@@ -22,35 +22,21 @@
                 TheOdin Library
             </div>
         </div>
-        <button>+</button>
+        <button class="newBook">+</button>
     </header>
 
-    <!--
-    <img src="Img/NothingsHere.png" alt="Img">
-    -->
-    
-    <div class="content">
-        <div class="container">
-            <div class="name">
-                "Game of Thrones"
-            </div>
-            <div class="author">
-                by R.R.Martin
-            </div>
-            <div class="status">
-                Completed
-            </div>
-            <div class="btmPart">
-                <button class="editBtn">
-                    ✒️
-                </button>
-                <div class="pages">
-                    (165)
-                </div>
-            </div>
-        </div>
-    </div>
+    <div class="content" id="bookList"></div>
 
+    <dialog class="modal">
+        <form class="form" method="dialog">
+            <h1 class="formTitle">Enter Book Details</h1>
+            <label>Title <input type="text" class="titleBook" required></label>
+            <label>Author <input type="text" class="authorBook" required></label>
+            <label>Pages<input type="number" class="pagesBook" required></label>
+            <button type="submit" class="submitForm">Submit</button>
+            <button class="closeForm">Close</button>
+        </form>
+    </dialog>
 
     <script src="app.js"></script>
 </body>
