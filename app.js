@@ -21,19 +21,44 @@ function displayBooks() {
         const bookStatus = document.createElement('div');
         bookStatus.className = 'status';
         bookStatus.textContent = book.status;
+        bookStatus.textContent = capitalizeFirstLetter(book.status);
+
+        if (bookStatus.textContent === 'Completed') {
+            bookStatus.style.color = 'green';
+        } else {
+            bookStatus.style.color = 'red';
+        }
 
         const btmPart = document.createElement('div');
         btmPart.className = 'btmPart';
 
+        const btmButtons = document.createElement('div');
+        btmButtons.className='btmButtons';
+
         const editButton = document.createElement('button');
         editButton.className = 'editBtn';
         editButton.textContent = '✒️';
+        editButton.addEventListener('click', () => {
+            modalOpen.showModal();
+            displayBooks();
+        });
+
+        const deleteButton=document.createElement('button');
+        deleteButton.className='deleteButton';
+        deleteButton.textContent='🚮'
+        deleteButton.addEventListener('click', () => {
+            books.splice(index, 1); 
+            displayBooks();
+        });
 
         const bookPages = document.createElement('div');
         bookPages.className = 'pages';
         bookPages.textContent = `(${book.pages})`;
 
-        btmPart.appendChild(editButton);
+        btmButtons.appendChild(editButton);
+        btmButtons.appendChild(deleteButton);
+
+        btmPart.appendChild(btmButtons);
         btmPart.appendChild(bookPages);
 
         bookContainer.appendChild(bookName);
@@ -61,17 +86,27 @@ newBtn.addEventListener('click', () => {
     modalOpen.showModal();
 });
 
-closeModal.addEventListener('click', (event) => {
+closeModal.addEventListener('click', () => {
     modalOpen.close();
 });
+
+function capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+}
 
 submitBtn.addEventListener('click', () => {
     let title = document.querySelector('.titleBook').value;
     let author = document.querySelector('.authorBook').value;
     let pages = document.querySelector('.pagesBook').value;
+    let status = document.querySelector('input[name="status"]:checked')?.value;
 
-    books.push({ title, author, pages: parseInt(pages) });
-    displayBooks();
-    modalOpen.close();
+    if (!title || !author || !pages || !status) {
+        alert('All details are necessary!!');
+    } else {
+        books.push({ title, author, pages: parseInt(pages), status });
+        displayBooks();
+        modalOpen.close();
+    }
+
 });
 

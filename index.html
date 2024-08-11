@@ -30,11 +30,29 @@
     <dialog class="modal">
         <form class="form" method="dialog">
             <h1 class="formTitle">Enter Book Details</h1>
-            <label>Title <input type="text" class="titleBook" required></label>
-            <label>Author <input type="text" class="authorBook" required></label>
-            <label>Pages<input type="number" class="pagesBook" required></label>
-            <button type="submit" class="submitForm">Submit</button>
-            <button class="closeForm">Close</button>
+
+            <label for="titleBook">Title</label>
+            <input type="text" id="titleBook" class="titleBook" required>
+
+            <label for="authorBook">Author</label>
+            <input type="text" id="authorBook" class="authorBook" required>
+
+            <label for="pagesBook">Pages</label>
+            <input type="number" id="pagesBook" class="pagesBook" required>
+
+            <label>
+                <div class="statusBook">Book Status</div>
+                <input type="radio" name="status" value="completed">
+                Completed
+
+                <input type="radio" name="status" value="pending">
+                Pending
+            </label>
+
+            <div class="buttonsForm">
+                <button type="submit" class="submitForm">Submit</button>
+                <button class="closeForm">Close</button>
+            </div>
         </form>
     </dialog>
 

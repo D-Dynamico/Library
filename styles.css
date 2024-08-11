@@ -41,6 +41,7 @@ header {
     font-weight: bold;
     margin-top: 15px;
     margin-right: 25px;
+    cursor: pointer;
 }
 
 .bookLogo {
@@ -100,6 +101,14 @@ header {
     color: #FFDE4D;
 }
 
+.deleteButton{
+    border: none;
+    cursor: pointer;
+    background: none;
+    font-size: 25px;
+    position: relative;
+}
+
 .content {
     display: flex;
     flex-wrap: wrap;
@@ -120,5 +129,15 @@ dialog::backdrop {
     border-radius: 20px;
     height: 40%;
     width: 25%;
+    color: white;
+    background: black;
+    border: #f3d53b 2px solid;
 }
 
+.submitForm, .closeForm{
+    background-color: #00f600;
+}
+
+.titleBook{
+    width: 200px;
+}
