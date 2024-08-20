@@ -2,6 +2,8 @@ let books = [
     { title: "Game of Thrones", author: "R.R.Martin", status: "Completed", pages: 694 }
 ];
 
+let editIndex = null; 
+
 function displayBooks() {
     const bookList = document.querySelector('#bookList');
     bookList.innerHTML = '';
@@ -20,32 +22,31 @@ function displayBooks() {
 
         const bookStatus = document.createElement('div');
         bookStatus.className = 'status';
-        bookStatus.textContent = book.status;
         bookStatus.textContent = capitalizeFirstLetter(book.status);
 
-        if (bookStatus.textContent === 'Completed') {
-            bookStatus.style.color = 'green';
-        } else {
-            bookStatus.style.color = 'red';
-        }
+        bookStatus.style.color = book.status.toLowerCase() === 'completed' ? 'green' : 'red';
 
         const btmPart = document.createElement('div');
         btmPart.className = 'btmPart';
 
         const btmButtons = document.createElement('div');
-        btmButtons.className='btmButtons';
+        btmButtons.className = 'btmButtons';
 
         const editButton = document.createElement('button');
         editButton.className = 'editBtn';
         editButton.textContent = '✒️';
         editButton.addEventListener('click', () => {
+            editIndex = index;  
+            document.querySelector('.titleBook').value = book.title;
+            document.querySelector('.authorBook').value = book.author;
+            document.querySelector('.pagesBook').value = book.pages;
+            document.querySelector(`input[name="status"][value="${book.status.toLowerCase()}"]`).checked = true;
             modalOpen.showModal();
-            displayBooks();
         });
 
-        const deleteButton=document.createElement('button');
-        deleteButton.className='deleteButton';
-        deleteButton.textContent='🚮'
+        const deleteButton = document.createElement('button');
+        deleteButton.className = 'deleteButton';
+        deleteButton.textContent = '🚮';
         deleteButton.addEventListener('click', () => {
             books.splice(index, 1); 
             displayBooks();
@@ -83,6 +84,8 @@ const closeModal = document.querySelector('.closeForm');
 const submitBtn = document.querySelector('.submitForm');
 
 newBtn.addEventListener('click', () => {
+    editIndex = null;  
+    document.querySelector('.form').reset();  
     modalOpen.showModal();
 });
 
@@ -103,10 +106,15 @@ submitBtn.addEventListener('click', () => {
     if (!title || !author || !pages || !status) {
         alert('All details are necessary!!');
     } else {
-        books.push({ title, author, pages: parseInt(pages), status });
+        const newBook = { title, author, pages: parseInt(pages), status: capitalizeFirstLetter(status) };
+        
+        if (editIndex !== null) {
+            books[editIndex] = newBook;
+        } else {
+            books.push(newBook);  
+        }
+        
         displayBooks();
         modalOpen.close();
     }
-
 });
-

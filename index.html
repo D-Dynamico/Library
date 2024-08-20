@@ -31,16 +31,22 @@
         <form class="form" method="dialog">
             <h1 class="formTitle">Enter Book Details</h1>
 
-            <label for="titleBook">Title</label>
-            <input type="text" id="titleBook" class="titleBook" required>
+            <div class="titleModal">
+                <label for="titleBook">Title</label>
+                <input type="text" id="titleBook" class="titleBook" required>
+            </div>
 
-            <label for="authorBook">Author</label>
-            <input type="text" id="authorBook" class="authorBook" required>
+            <div class="authorModal">
+                <label for="authorBook">Author</label>
+                <input type="text" id="authorBook" class="authorBook" required>
+            </div>
 
-            <label for="pagesBook">Pages</label>
-            <input type="number" id="pagesBook" class="pagesBook" required>
+            <div class="pagesModal">
+                <label for="pagesBook">Pages</label>
+                <input type="number" id="pagesBook" class="pagesBook" required>
+            </div>
 
-            <label>
+            <label class="statusModal">
                 <div class="statusBook">Book Status</div>
                 <input type="radio" name="status" value="completed">
                 Completed
