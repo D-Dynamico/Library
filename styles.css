@@ -128,16 +128,63 @@ dialog::backdrop {
 .modal{
     border-radius: 20px;
     height: 40%;
-    width: 25%;
+    width: 18%;
     color: white;
     background: black;
     border: #f3d53b 2px solid;
 }
 
 .submitForm, .closeForm{
-    background-color: #00f600;
+    background-color: #ffffff;
 }
 
-.titleBook{
-    width: 200px;
+.titleBook {
+    border-radius: 10px;
+    padding: 4px;
+    border: 1px solid #ffffff;
+    margin-left: 12%;
+}
+
+.titleModal{
+    margin-bottom: 10px;
+}
+
+.authorBook{
+    border-radius: 10px;
+    padding: 4px;
+    border: 1px solid #ffffff;
+    margin-left: 7%;
+}
+
+.authorModal{
+    margin-bottom: 10px;
+}
+
+.pagesBook{
+    border-radius: 10px;
+    padding: 4px;
+    border: 1px solid #ffffff;
+    margin-left: 10.5%;
+}
+
+.pagesModal{
+    margin-bottom: 10px;
+}
+
+.statusModal{
+    margin: 10px 0;
+}
+
+.buttonsForm{
+    margin-top: 10px;
+}
+
+.message{
+    color: white;
+    font-family: "Oswald", sans-serif;
+    font-size: 58px;
+    z-index: 1;
+    position: absolute;
+    left: 40%;
+    top: 40%;
 }

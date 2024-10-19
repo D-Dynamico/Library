@@ -2,7 +2,7 @@ let books = [
     { title: "Game of Thrones", author: "R.R.Martin", status: "Completed", pages: 694 }
 ];
 
-let editIndex = null; 
+let editIndex = null;
 
 function displayBooks() {
     const bookList = document.querySelector('#bookList');
@@ -36,7 +36,7 @@ function displayBooks() {
         editButton.className = 'editBtn';
         editButton.textContent = '✒️';
         editButton.addEventListener('click', () => {
-            editIndex = index;  
+            editIndex = index;
             document.querySelector('.titleBook').value = book.title;
             document.querySelector('.authorBook').value = book.author;
             document.querySelector('.pagesBook').value = book.pages;
@@ -48,8 +48,9 @@ function displayBooks() {
         deleteButton.className = 'deleteButton';
         deleteButton.textContent = '🚮';
         deleteButton.addEventListener('click', () => {
-            books.splice(index, 1); 
+            books.splice(index, 1);
             displayBooks();
+            checkEmptyBooks();
         });
 
         const bookPages = document.createElement('div');
@@ -69,9 +70,13 @@ function displayBooks() {
 
         bookList.appendChild(bookContainer);
     });
+
+    checkEmptyBooks();
 }
 
-document.addEventListener('DOMContentLoaded', displayBooks);
+document.addEventListener('DOMContentLoaded', () => {
+    displayBooks();
+});
 
 const reset = document.querySelector(".txt");
 reset.addEventListener("click", () => {
@@ -84,12 +89,13 @@ const closeModal = document.querySelector('.closeForm');
 const submitBtn = document.querySelector('.submitForm');
 
 newBtn.addEventListener('click', () => {
-    editIndex = null;  
-    document.querySelector('.form').reset();  
+    editIndex = null;
+    document.querySelector('.form').reset();
     modalOpen.showModal();
 });
 
-closeModal.addEventListener('click', () => {
+closeModal.addEventListener('click', (event) => {
+    event.preventDefault();
     modalOpen.close();
 });
 
@@ -97,7 +103,9 @@ function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
-submitBtn.addEventListener('click', () => {
+submitBtn.addEventListener('click', (event) => {
+    event.preventDefault();
+
     let title = document.querySelector('.titleBook').value;
     let author = document.querySelector('.authorBook').value;
     let pages = document.querySelector('.pagesBook').value;
@@ -107,14 +115,23 @@ submitBtn.addEventListener('click', () => {
         alert('All details are necessary!!');
     } else {
         const newBook = { title, author, pages: parseInt(pages), status: capitalizeFirstLetter(status) };
-        
+
         if (editIndex !== null) {
             books[editIndex] = newBook;
         } else {
-            books.push(newBook);  
+            books.push(newBook);
         }
-        
+
         displayBooks();
         modalOpen.close();
     }
 });
+
+function checkEmptyBooks() {
+    const message = document.querySelector('.message');
+    if (books.length === 0) {
+        message.style.display = 'block';
+    } else {
+        message.style.display = 'none';
+    }
+}
